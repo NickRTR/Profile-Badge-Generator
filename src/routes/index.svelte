@@ -14,19 +14,24 @@
 <script>
     export let icons;
 
-    let title = "Svelte";
-    let color;
+    let title = "";
+    let backgroundColor;
+    let iconColor = "FFFFFF";
+
     let url;
 
     function getBanner() {
         findColor();
-        url = `https://img.shields.io/badge/${title}-${color}?style=for-the-badge&logo=${title}&logoColor=fff`;
+        if (iconColor.startsWith("#")) {
+            iconColor = iconColor.substring(1);
+        }
+        url = `https://img.shields.io/badge/${title}-${backgroundColor}?style=for-the-badge&logo=${title}&logoColor=${iconColor}`;
     }
 
     function findColor() {
         icons.forEach(icon => {
             if (icon.title.toLowerCase() === title.toLowerCase()) {
-                color = icon.hex;
+                backgroundColor = icon.hex;
             }
         });
     }
@@ -34,9 +39,11 @@
 
 <main>
     <form>
-        <input type="text" placeholder="title" bind:value={title} on:input={findColor(title)}>
+        <input type="text" placeholder="title" bind:value={title}>
+        <input type="color" placeholder="icon color" bind:value={iconColor} >
         <button type="submit" on:click|preventDefault={getBanner}>Search</button>
     </form>
+
     {#if url}
         <img src={url} alt={title} title={title}>
     {/if}
