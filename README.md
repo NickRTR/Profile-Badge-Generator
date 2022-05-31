@@ -15,3 +15,6 @@ Todos:
 <!-- TODO: search suggestions with fitting icons -->
 <!-- TODO: UI / Design -->
 <!-- TODO: Option to preserve the orginial icon (change bg color for contrast) -->
+<!-- TODO: Download button -->
+<!-- TODO: Copy link button -->
+<!-- TODO: Implement testing with vitest ->
