@@ -12,11 +12,6 @@
 </script>
 
 <script>
-
-    // Todos
-    // TODO: search suggestions with fitting icons
-    // TODO: UI !!!
-
     export let icons;
 
     let title = "";
