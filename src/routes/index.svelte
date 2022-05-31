@@ -41,7 +41,7 @@
     <form>
         <input type="text" placeholder="title" bind:value={title}>
         <input type="color" placeholder="icon color" bind:value={iconColor} >
-        <button type="submit" on:click|preventDefault={getBanner}>Search</button>
+        <button type="submit" on:click|preventDefault={getBanner}>Create Banner</button>
     </form>
 
     {#if url}
