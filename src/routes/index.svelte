@@ -1,17 +1,43 @@
+<script context="module">
+    export async function load() {
+        const res = await fetch("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/_data/simple-icons.json");
+        const data = await res.json();
+
+        return {
+            props: {
+                icons: data.icons
+            }
+        }
+    }
+</script>
+
 <script>
-    // use simple-icons package to get the hex code
+    export let icons;
 
     let title = "Svelte";
-    let backgroundColor = "000";
-    let color = "fff";
+    let color;
+    let url;
 
+    function getBanner() {
+        findColor();
+        url = `https://img.shields.io/badge/${title}-${color}?style=for-the-badge&logo=${title}&logoColor=fff`;
+    }
 
-    $: url = `https://img.shields.io/badge/${title}-${backgroundColor}?style=for-the-badge&logo=${title}&logoColor=${color}`;
+    function findColor() {
+        icons.forEach(icon => {
+            if (icon.title.toLowerCase() === title.toLowerCase()) {
+                color = icon.hex;
+            }
+        });
+    }
 </script>
 
 <main>
     <form>
-        <input type="text" placeholder="title" bind:value={title}>
+        <input type="text" placeholder="title" bind:value={title} on:input={findColor(title)}>
+        <button type="submit" on:click|preventDefault={getBanner}>Search</button>
     </form>
-    <img src={url} alt={title} title={title}>
+    {#if url}
+        <img src={url} alt={title} title={title}>
+    {/if}
 </main>
