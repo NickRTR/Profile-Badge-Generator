@@ -14,3 +14,4 @@ Todos:
 
 <!-- TODO: search suggestions with fitting icons -->
 <!-- TODO: UI / Design -->
+<!-- TODO: Option to preserve the orginial icon (change bg color for contrast) -->
