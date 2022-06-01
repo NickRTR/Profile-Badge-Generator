@@ -18,3 +18,4 @@ Todos:
 <!-- TODO: Download button -->
 <!-- TODO: Copy link button -->
 <!-- TODO: Implement testing with vitest ->
+<!-- TODO: Display error and link to request icon if it's not available on simpleicons -->
