@@ -10,7 +10,7 @@ The purpose of this project is to provide an easy way to create banners like thi
 2. Enter the Logo you're trying to find
 3. Press copy or download the Banner image.
 
-Todos:
+## Todos:
 
 TODO: search suggestions with fitting icons
 TODO: UI / Design
