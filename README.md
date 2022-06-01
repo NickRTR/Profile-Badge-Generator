@@ -12,10 +12,10 @@ The purpose of this project is to provide an easy way to create banners like thi
 
 Todos:
 
-<!-- TODO: search suggestions with fitting icons -->
-<!-- TODO: UI / Design -->
-<!-- TODO: Option to preserve the orginial icon (change bg color for contrast) -->
-<!-- TODO: Download button -->
-<!-- TODO: Copy link button -->
-<!-- TODO: Implement testing with vitest ->
-<!-- TODO: Display error and link to request icon if it's not available on simpleicons -->
+TODO: search suggestions with fitting icons
+TODO: UI / Design
+TODO: Option to preserve the orginial icon (change bg color for contrast)
+TODO: Download button
+TODO: Copy link button
+TODO: Implement testing with vitest
+TODO: Display error and link to request icon if it's not available on simpleicons
