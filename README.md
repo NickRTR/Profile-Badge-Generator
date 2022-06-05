@@ -12,7 +12,6 @@ The purpose of this project is to provide an easy way to create banners like thi
 
 ## Todos:
 
-TODO: search suggestions with fitting icons
 TODO: UI / Design
 TODO: Option to preserve the orginial icon (change bg color for contrast)
 TODO: Implement testing with vitest

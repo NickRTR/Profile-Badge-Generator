@@ -22,6 +22,17 @@
     // undefinded to hide banner until "getBanner" is called
     let url;
     let iconNotFound = false;
+    let searchSuggestions = [];
+
+    function getSearchSuggestions() {
+        searchSuggestions = []
+        for (let i = 0; i < icons.length; i++) {
+            // filter the icons to fitting ones and limit max suggestions to 10
+            if (icons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
+                searchSuggestions = [...searchSuggestions, icons[i].title]
+            }
+        }
+    }
 
     function getBanner() {
         url = undefined;
@@ -71,9 +82,12 @@
 
 <main>
     <form>
-        <input type="text" placeholder="title" bind:value={title}>
+        <input type="text" placeholder="title" bind:value={title} on:input={getSearchSuggestions}>
+        {#each searchSuggestions as suggestion}
+            <button type="submit" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button>
+        {/each}
         <input type="color" placeholder="icon color" bind:value={inputColor} >
-        <button type="submit" on:click|preventDefault={getBanner}>Create Banner</button>
+        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
     </form>
 
     {#if url}
