@@ -11,6 +11,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Profile Banner Generator</title>
+</svelte:head>
+
 <body>
     <SvelteToast options={defaultToastOptions} />
     <main><slot></slot></main>
