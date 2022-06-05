@@ -12,7 +12,8 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@zerodevx/svelte-toast": "^0.7.2",
-		"svelte": "^3.44.0"
+		"svelte": "^3.44.0",
+		"svelte-toggle": "^3.1.0"
 	},
 	"type": "module"
 }
