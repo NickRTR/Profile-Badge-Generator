@@ -87,8 +87,8 @@
     
     <section class="result">
         {#if url}
-            <img src={url} alt={title} title={title}>
-            <div class="copy"><button type="button" title="copy banner url" on:click|preventDefault={() => {copy(url)}}>Copy URL</button></div>
+            <img src={url} alt={title} title={title} on:click={() => {copy(url)}}>
+            <div class="copy"><button type="button" title="copy URL" on:click={() => {copy(url)}}>Copy URL</button></div>
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
