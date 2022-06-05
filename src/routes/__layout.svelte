@@ -34,14 +34,13 @@
         justify-content: center;
     }
 
-    :global(:root) {
-        --accent: #E59500;
-        --text: white;
+    :global(button, input) {
+        font-family: inherit;
     }
 
-    :global(button) {
-        font-family: inherit;
-
+    :global(:root) {
+        --accent: red;
+        --text: white;
     }
 
     :root {

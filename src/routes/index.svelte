@@ -49,6 +49,7 @@
             }
             url = `https://img.shields.io/badge/${iconName}-${backgroundColor}?style=for-the-badge&logo=${iconName}&logoColor=${iconColor}`;
             searchSuggestions = [];
+            iconNotFound = false;
         } catch (e) {
             iconNotFound = true;
             console.error(e);
@@ -83,26 +84,30 @@
         <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
     </form>
 
-    <div class="result">
+    
+    <section class="result">
         {#if url}
             <img src={url} alt={title} title={title}>
-            <button type="button" title="copy banner url" on:click|preventDefault={() => {copy(url)}}>Copy URL</button>
+            <div class="copy"><button type="button" title="copy banner url" on:click|preventDefault={() => {copy(url)}}>Copy URL</button></div>
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
             <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" target="_blank">Request icon on SimpleIcons</a>
         {/if}
-    </div>
+    </section>
 </main>
 
 <style>
+    /* input */
     button {
-        border-radius: .5rem;
+        border-radius: .6rem;
         outline: none;
         border: 3px solid var(--text);
         background-color: var(--text);
         cursor: pointer;
         transition: all linear .1s; 
+        padding-block: .2rem;
+        font-weight: 600;
     }
 
     input {
@@ -121,7 +126,7 @@
     
     .search input {
         margin-block: .4rem;
-        padding: .25rem .5rem;
+        padding: .3rem .5rem;
     }
 
     .suggestions {
@@ -132,22 +137,33 @@
         margin-block: .2rem;
     }
 
-    :global(label) {
-        font-size: 1rem !important;
-    }
-
     .preserveIcon {
         margin-bottom: 1rem;
     }
 
-    button[type=submit] {
-        font-size: 1rem;
-        font-weight: 600;
+    :global(label) {
+        font-size: 1rem !important;
     }
 
-    /* hover and focus effects */
+    button[type=submit] {
+        font-size: 1rem;
+    }
 
     button:hover, button:focus, input:hover, input:focus {
         border: 3px solid var(--accent);
+    }
+
+    /* result */
+    section.result {
+        margin-top: 1.5rem;
+        padding-top: .5rem;
+        border-top: 5px solid var(--accent);
+    }
+
+    section.result img {
+        margin-block: 1rem;
+        height: 3rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 2rem var(--accent);
     }
 </style>
