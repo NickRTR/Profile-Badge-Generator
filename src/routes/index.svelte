@@ -14,6 +14,8 @@
 <script>
     import { copy, getColorDependingOnContrast } from "$lib/helper";
     import Toggle from "svelte-toggle";
+    import { fade, fly } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
 
     export let icons;
 
@@ -75,12 +77,12 @@
             <p class="inputLabel">Search for a brand</p>
             <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions}>
             <div class="suggestions">
-                {#each searchSuggestions as suggestion}
-                    <div class="suggestion"><button type="button" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
+                {#each searchSuggestions as suggestion, i (suggestion)}
+                    <div animate:flip in:fade out:fly={{x:100}} class="suggestion"><button type="button" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
                 {/each}
             </div>
         </div>
-        <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} label="Preserve icon color?" /></div>
+        <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBanner(title)}} label="Preserve icon color?" /></div>
         <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
     </form>
 
