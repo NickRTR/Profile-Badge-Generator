@@ -112,6 +112,7 @@
         transition: all linear .1s; 
         padding-block: .2rem;
         font-weight: 600;
+        color: black;
     }
 
     input {
