@@ -1,10 +1,12 @@
 <script>
-    import { SvelteToast } from '@zerodevx/svelte-toast'
+    import { SvelteToast } from "@zerodevx/svelte-toast"
 
     const defaultToastOptions = {
         theme: {
-			'--toastBackground': '#3A4750',
-    		'--toastBarBackground': '#F6C90E'
+			"--toastBackground": "white",
+    		"--toastBarBackground": "#FFBC42",
+            "--toastColor": "black",
+            "--toastBorderRadius": ".75rem",
 		},
     }
 </script>
@@ -47,7 +49,7 @@
         /* Position toast at bottom */
         --toastContainerTop: auto;
         --toastContainerRight: auto;
-        --toastContainerBottom: 5rem;
+        --toastContainerBottom: 2rem;
         --toastContainerLeft: calc(50vw - 8rem);
     }
 </style>
