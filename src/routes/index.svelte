@@ -19,12 +19,19 @@
 
     // undefinded to hide banner until "getBanner" is called
     let url;
+    let iconNotFound = false;
 
     function getBanner() {
-        let backgroundColor = getBackgroundColor()
-        let iconColor = getIconColorDependingOnBackground(backgroundColor);
+        url = undefined;
+        try {
+            let backgroundColor = getBackgroundColor();
+            let iconColor = getIconColorDependingOnBackground(backgroundColor);
+            url = `https://img.shields.io/badge/${title}-${backgroundColor}?style=for-the-badge&logo=${title}&logoColor=${iconColor}`;
+        } catch (e) {
+            iconNotFound = true;
+            console.error(e);
+        }
 
-        url = `https://img.shields.io/badge/${title}-${backgroundColor}?style=for-the-badge&logo=${title}&logoColor=${iconColor}`;
     }
 
     function getBackgroundColor() {
@@ -69,5 +76,9 @@
 
     {#if url}
         <img src={url} alt={title} title={title}>
+    {/if}
+    {#if iconNotFound}
+        <p class="error">Icon not found!</p>
+        <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" target="_blank">Request icon on SimpleIcons</a>
     {/if}
 </main>
