@@ -65,13 +65,22 @@
 </script>
 
 <main>
+    <h1>Profile Badge Generator</h1>
+
     <form>
-        <input type="text" placeholder="title" bind:value={title} on:input={getSearchSuggestions}>
-        {#each searchSuggestions as suggestion}
-            <button type="submit" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button>
-        {/each}
-        <label for="preserveIconColor">preserve icon color?</label>
-        <input type="checkbox" name="preserveIconColor" id="preserveIconColor" bind:value={preserveIconColor}>
+        <div class="search">
+            <p class="inputLabel">Search for a brand</p>
+            <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions}>
+            <div class="suggestions">
+                {#each searchSuggestions as suggestion}
+                    <div class="suggestion"><button type="submit" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
+                {/each}
+            </div>
+        </div>
+        <div class="preserveIcon">
+            <label for="preserveIconColor">preserve icon color?</label>
+            <input type="checkbox" name="preserveIconColor" bind:value={preserveIconColor}>
+        </div>
         <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
     </form>
 
@@ -84,3 +93,25 @@
         <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" target="_blank">Request icon on SimpleIcons</a>
     {/if}
 </main>
+
+<style>
+    .search {
+        display: block;
+    }
+
+    .inputLabel {
+        margin: 0;
+        margin-bottom: .4rem;
+        text-align: left;
+    }
+
+    .search input {
+        border-radius: .75rem;
+        border: none;
+        outline: none;
+        padding: .25rem .5rem;
+        border: 3px solid var(--text);
+        font-size: 1rem;
+        margin-bottom: .5rem;
+    }
+</style>
