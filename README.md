@@ -13,4 +13,3 @@ The purpose of this project is to provide an easy way to create banners like thi
 ## Todos:
 
 TODO: Implement testing with vitest
-TODO: Responsive design
