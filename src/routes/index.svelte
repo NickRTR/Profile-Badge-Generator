@@ -40,6 +40,8 @@
     }
 
     function getBanner(iconName) {
+        if (iconName === "") return // escape if input is empty
+
         url = undefined; // remove old banner
         title = iconName; // update title if suggestion was pressed
         try {

@@ -31,6 +31,7 @@
     }
 
     body {
+        margin-inline: .25rem;
         height: 100%;
         background-attachment: fixed;
         background-color: #21D4FD;
