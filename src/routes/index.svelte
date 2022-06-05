@@ -12,12 +12,12 @@
 </script>
 
 <script>
-    import { copy, getIconColorDependingOnBackground } from "$lib/helper";
+    import { copy, getColorDependingOnContrast } from "$lib/helper";
 
     export let icons;
 
     let title = "";
-    let inputColor = "#FFFFFF";
+    let preserveIconColor = false;
 
     // undefinded to hide banner until "getBanner" is called
     let url;
@@ -26,31 +26,38 @@
 
     function getSearchSuggestions() {
         searchSuggestions = [];
-        for (let i = 0; i < icons.length; i++) {
-            // filter the icons to fitting ones and limit max suggestions to 10
-            if (icons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
-                searchSuggestions = [...searchSuggestions, icons[i].title];
+        if (title !== "") {
+            for (let i = 0; i < icons.length; i++) {
+                // filter the icons to fitting ones and limit max suggestions to 10
+                if (icons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
+                    searchSuggestions = [...searchSuggestions, icons[i].title];
+                }
             }
         }
     }
 
-    function getBanner() {
+    function getBanner(iconName) {
         url = undefined; // remove old banner
+        title = iconName; // update title if suggestion was pressed
         try {
-            let backgroundColor = getBackgroundColor();
-            let iconColor = getIconColorDependingOnBackground(backgroundColor);
-            url = `https://img.shields.io/badge/${title}-${backgroundColor}?style=for-the-badge&logo=${title}&logoColor=${iconColor}`;
+            let backgroundColor = getAccentColor(iconName);
+            let iconColor = getColorDependingOnContrast(backgroundColor);
+            if (preserveIconColor) {
+                iconColor = getAccentColor(iconName);
+                backgroundColor = getColorDependingOnContrast(iconColor);
+            }
+            url = `https://img.shields.io/badge/${iconName}-${backgroundColor}?style=for-the-badge&logo=${iconName}&logoColor=${iconColor}`;
         } catch (e) {
             iconNotFound = true;
             console.error(e);
         }
     }
 
-    function getBackgroundColor() {
+    function getAccentColor(iconName) {
         // loop through all available icons
         for (let i = 0; i < icons.length; i++) {
             // find the right icon and return it's color value
-            if (icons[i].title.toLowerCase() === title.toLowerCase()) {
+            if (icons[i].title.toLowerCase() === iconName.toLowerCase()) {
                 return icons[i].hex.toString();
             }
         }
@@ -63,7 +70,8 @@
         {#each searchSuggestions as suggestion}
             <button type="submit" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button>
         {/each}
-        <input type="color" placeholder="icon color" bind:value={inputColor} >
+        <label for="preserveIconColor">preserve icon color?</label>
+        <input type="checkbox" name="preserveIconColor" id="preserveIconColor" bind:value={preserveIconColor}>
         <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
     </form>
 

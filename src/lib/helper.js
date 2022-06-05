@@ -7,9 +7,9 @@ export function copy(text) {
 
 // colors
 
-export function getIconColorDependingOnBackground(bgColor) {
+export function getColorDependingOnContrast(color) {
     // sets the icon color either black or white, depending on the banner's background
-    let rgbColor = hexToRGB(bgColor); // convert hex color to an rgb color
+    let rgbColor = hexToRGB(color); // convert hex color to an rgb color
     if ((rgbColor.r * 0.299 + rgbColor.g * 0.587 + rgbColor.b * 0.114) > 150) {
         return "000000";
     } else {
