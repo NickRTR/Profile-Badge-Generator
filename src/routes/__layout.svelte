@@ -39,7 +39,7 @@
     }
 
     :global(:root) {
-        --accent: red;
+        --accent: #FFBC42;
         --text: white;
     }
 
