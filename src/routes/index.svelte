@@ -12,6 +12,8 @@
 </script>
 
 <script>
+    import { copy } from "$lib/helper";
+
     export let icons;
 
     let title = "";
@@ -76,6 +78,7 @@
 
     {#if url}
         <img src={url} alt={title} title={title}>
+        <button type="button" title="copy banner url" on:click|preventDefault={() => {copy(url)}}>Copy URL</button>
     {/if}
     {#if iconNotFound}
         <p class="error">Icon not found!</p>
