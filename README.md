@@ -14,3 +14,5 @@ The purpose of this project is to provide an easy way to create banners like thi
 
 TODO: Implement testing with vitest
 TODO: API endpoint
+TODO: Github link
+TODO: Auto select text in input field

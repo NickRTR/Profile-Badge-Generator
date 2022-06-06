@@ -54,7 +54,7 @@
         /* Position toast at bottom */
         --toastContainerTop: auto;
         --toastContainerRight: auto;
-        --toastContainerBottom: 2rem;
+        --toastContainerBottom: 1rem;
         --toastContainerLeft: calc(50vw - 8rem);
     }
 </style>

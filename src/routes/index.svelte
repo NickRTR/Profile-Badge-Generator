@@ -96,7 +96,7 @@
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
-            <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" target="_blank">Request icon on SimpleIcons</a>
+            <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" title="Request icon" target="_blank">Request icon on SimpleIcons</a>
         {/if}
     </section>
 </main>
@@ -170,5 +170,9 @@
         height: 3rem;
         border-radius: 1rem;
         box-shadow: 0 0 2rem var(--accent);
+    }
+
+    a {
+        color: var(--text);
     }
 </style>
