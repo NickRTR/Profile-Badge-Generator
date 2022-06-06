@@ -43,7 +43,7 @@
     function getBanner(iconName) {
         if (iconName === "") return // escape if input is empty
 
-        if (searchSuggestions.length !== 0) iconName = searchSuggestions[0];
+        if (searchSuggestions.length === 1) iconName = searchSuggestions[0];
 
         url = undefined; // remove old badge
         title = iconName; // update title if suggestion was pressed
