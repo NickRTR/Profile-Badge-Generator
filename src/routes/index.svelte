@@ -12,7 +12,7 @@
 </script>
 
 <script>
-    import { copy, getColorDependingOnContrast } from "$lib/helper";
+    import { copy, copyMarkdownImage, getColorDependingOnContrast } from "$lib/helper";
     import { selectTextOnFocus } from "$lib/selectText.js";
     import { fade, fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
@@ -107,7 +107,7 @@
             <img src={url} alt={title} title={title} on:click={() => {copy(url)}}>
             <div class="buttons">
                 <div class="copy"><button type="button" title="Copy URL" on:click={() => {copy(url)}}>Copy URL</button></div>
-                <div class="copy"><button type="button" title="Copy as Markdown image" on:click={() => {copy(`![${title}](${url})`)}}>Copy as Markdown image</button></div>
+                <div class="copy"><button type="button" title="Copy as Markdown image" on:click={() => {copyMarkdownImage(url, title)}}>Copy as Markdown image</button></div>
                 <div class="download"><button type="button" title="Download Badge" on:click={download}>Download Badge</button></div>
             </div>
         {/if}

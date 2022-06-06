@@ -5,6 +5,17 @@ export function copy(text) {
     toast.push("Copied URL to clipboard!");
 }
 
+export function copyMarkdownImage(url, title) {
+    // if title has space (example: Godot Engine) copy as html image
+    if (url.indexOf(' ') >= 0) {
+        navigator.clipboard.writeText(`<img src="${url}" alt="${title}">`);
+    } else {
+        navigator.clipboard.writeText(`![${title}](${url})`);
+    }
+
+    toast.push("Copied URL to clipboard!");
+}
+
 // colors
 
 export function getColorDependingOnContrast(color) {
