@@ -23,7 +23,7 @@
     let title = "";
     let preserveIconColor = false;
 
-    // undefinded to hide banner until "getBanner" is called
+    // undefinded to hide badge until "getBanner" is called
     let url;
     let iconNotFound = false;
     let searchSuggestions = [];
@@ -43,7 +43,7 @@
     function getBanner(iconName) {
         if (iconName === "") return // escape if input is empty
 
-        url = undefined; // remove old banner
+        url = undefined; // remove old badge
         title = iconName; // update title if suggestion was pressed
         try {
             let backgroundColor = getAccentColor(iconName);
@@ -70,6 +70,18 @@
             }
         }
     }
+
+    async function download() {
+        const badge = await fetch(url)
+        const imageURL = URL.createObjectURL(await badge.blob())
+
+        const link = document.createElement("a");
+        link.href = imageURL;
+        link.download = title;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 </script>
 
 <main>
@@ -86,14 +98,17 @@
             </div>
         </div>
         <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBanner(title)}} label="Preserve icon color?" /></div>
-        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Banner</button>
+        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Badge</button>
     </form>
 
     
     <section class="result">
         {#if url}
             <img src={url} alt={title} title={title} on:click={() => {copy(url)}}>
-            <div class="copy"><button type="button" title="copy URL" on:click={() => {copy(url)}}>Copy URL</button></div>
+            <div class="buttons">
+                <div class="copy"><button type="button" title="Copy URL" on:click={() => {copy(url)}}>Copy URL</button></div>
+                <div class="download"><button type="button" title="Download Badge" on:click={download}>Download Badge</button></div>
+            </div>
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
@@ -171,6 +186,14 @@
         height: 3rem;
         border-radius: 1rem;
         box-shadow: 0 0 2rem var(--accent);
+    }
+
+    .buttons {
+        display: flex;
+    }
+
+    .buttons button {
+        margin-right: .5rem;
     }
 
     a {
