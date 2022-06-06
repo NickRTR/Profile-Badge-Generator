@@ -72,8 +72,8 @@
     }
 
     async function download() {
-        const badge = await fetch(url)
-        const imageURL = URL.createObjectURL(await badge.blob())
+        const badge = await fetch(url);
+        const imageURL = URL.createObjectURL(await badge.blob());
 
         const link = document.createElement("a");
         link.href = imageURL;
