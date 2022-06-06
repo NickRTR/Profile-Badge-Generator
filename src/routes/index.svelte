@@ -13,9 +13,10 @@
 
 <script>
     import { copy, getColorDependingOnContrast } from "$lib/helper";
-    import Toggle from "svelte-toggle";
+    import { selectTextOnFocus } from "$lib/selectText.js";
     import { fade, fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
+    import Toggle from "svelte-toggle";
 
     export let icons;
 
@@ -77,7 +78,7 @@
     <form>
         <div class="search">
             <p class="inputLabel">Search for a brand</p>
-            <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions}>
+            <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions} use:selectTextOnFocus>
             <div class="suggestions">
                 {#each searchSuggestions as suggestion, i (suggestion)}
                     <div animate:flip in:fade out:fly={{x:100}} class="suggestion"><button type="button" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
