@@ -43,6 +43,8 @@
     function getBanner(iconName) {
         if (iconName === "") return // escape if input is empty
 
+        if (searchSuggestions.length !== 0) iconName = searchSuggestions[0];
+
         url = undefined; // remove old badge
         title = iconName; // update title if suggestion was pressed
         try {
@@ -98,7 +100,7 @@
             </div>
         </div>
         <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBanner(title)}} label="Preserve icon color?" /></div>
-        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Create Badge</button>
+        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Generate Badge</button>
     </form>
 
     
