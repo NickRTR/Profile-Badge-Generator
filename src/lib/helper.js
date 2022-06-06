@@ -12,8 +12,7 @@ export function copyMarkdownImage(url, title) {
     } else {
         navigator.clipboard.writeText(`![${title}](${url})`);
     }
-
-    toast.push("Copied URL to clipboard!");
+    toast.push("Copied Markdown image to clipboard!");
 }
 
 // colors
