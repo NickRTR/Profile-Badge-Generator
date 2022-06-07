@@ -91,7 +91,7 @@
 
     <form>
         <div class="search">
-            <p class="inputLabel">Search for a brand</p>
+            <p class="inputLabel">Search a brand</p>
             <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions} use:selectTextOnFocus>
             <div class="suggestions">
                 {#each searchSuggestions as suggestion, i (suggestion)}
