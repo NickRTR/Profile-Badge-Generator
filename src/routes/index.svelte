@@ -121,6 +121,16 @@
 </main>
 
 <style>
+    main {
+        display: table-cell;
+        vertical-align: middle;
+        height: 100vh;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
     /* input */
     button {
         border-radius: .6rem;
