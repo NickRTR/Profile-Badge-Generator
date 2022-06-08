@@ -87,7 +87,10 @@
 </script>
 
 <main>
-    <h1>Profile Badge Generator</h1>
+    <header>
+        <h1>Profile Badge Generator</h1>
+        <a href="https://github.com/NickRTR/Profile-Badge-Generator" title="Github" target="_blank"><img class="Github" src="/github.svg" alt="Github" /></a>
+    </header>    
 
     <form>
         <div class="search">
@@ -102,7 +105,6 @@
         <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBanner(title)}} label="Preserve icon color?" /></div>
         <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Generate Badge</button>
     </form>
-
     
     <section class="result">
         {#if url}
@@ -128,7 +130,19 @@
     }
 
     h1 {
-        margin-top: 0;
+        margin: 0;
+    }
+
+    header {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+
+    .Github {
+        width: 2rem;
+        height: 2rem;
+        margin-left: 1rem;
+        margin-top: .2rem;
     }
 
     /* input */
