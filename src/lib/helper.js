@@ -1,4 +1,11 @@
 import { toast } from "@zerodevx/svelte-toast";
+import { icons } from "$lib/stores";
+
+let allIcons = [];
+
+icons.subscribe(value => {
+    allIcons = value
+});
 
 export function copy(text) {
     navigator.clipboard.writeText(text);
@@ -15,7 +22,36 @@ export function copyMarkdownImage(url, title) {
     toast.push("Copied Markdown image to clipboard!");
 }
 
+// input
+
+export function getSearchSuggestions(title) {
+    let searchSuggestions = [];
+    if (title !== "") {
+        for (let i in allIcons) {
+            // filter the icons to fitting ones and limit max suggestions to 10
+            if (allIcons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
+                searchSuggestions = [...searchSuggestions, allIcons[i].title];
+            }
+        }
+    }
+    return searchSuggestions;
+}
+
 // colors
+
+export function getAccentColor(iconName) {
+    // BUG: if function is called from api endpoint, allIcons is undefinded
+
+    // loop through all available icons
+    for (let i in allIcons) {
+        // find the right icon and return it's color value
+        if (allIcons[i].title.toLowerCase() === iconName.toLowerCase()) {
+            return allIcons[i].hex.toString();
+        }
+    }
+
+    return "FFFFFF";
+}
 
 export function getColorDependingOnContrast(color) {
     // sets the icon color either black or white, depending on the banner's background

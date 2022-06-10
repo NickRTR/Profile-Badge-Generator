@@ -1,24 +1,9 @@
-<script context="module">
-    export async function load({ fetch }) {
-        const res = await fetch("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/_data/simple-icons.json");
-        const data = await res.json();
-
-        return {
-            props: {
-                icons: data.icons
-            }
-        }
-    }
-</script>
-
 <script>
-    import { copy, copyMarkdownImage, getColorDependingOnContrast } from "$lib/helper";
+    import { copy, copyMarkdownImage, getSearchSuggestions } from "$lib/helper";
     import { selectTextOnFocus } from "$lib/selectText.js";
     import { fade, fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
     import Toggle from "svelte-toggle";
-
-    export let icons;
 
     let title = "";
     let preserveIconColor = false;
@@ -28,48 +13,21 @@
     let iconNotFound = false;
     let searchSuggestions = [];
 
-    function getSearchSuggestions() {
-        searchSuggestions = [];
-        if (title !== "") {
-            for (let i = 0; i < icons.length; i++) {
-                // filter the icons to fitting ones and limit max suggestions to 10
-                if (icons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
-                    searchSuggestions = [...searchSuggestions, icons[i].title];
-                }
-            }
-        }
-    }
-
-    function getBanner(iconName) {
+    async function getBanner(iconName) {
         if (iconName === "") return // escape if input is empty
 
         if (searchSuggestions.length === 1) iconName = searchSuggestions[0];
 
         url = undefined; // remove old badge
         title = iconName; // update title if suggestion was pressed
-        try {
-            let backgroundColor = getAccentColor(iconName);
-            let iconColor = getColorDependingOnContrast(backgroundColor);
-            if (preserveIconColor) {
-                iconColor = getAccentColor(iconName);
-                backgroundColor = getColorDependingOnContrast(iconColor);
-            }
-            url = `https://img.shields.io/badge/${iconName}-${backgroundColor}?style=for-the-badge&logo=${iconName}&logoColor=${iconColor}`;
+        const result = await fetch(`/api/${iconName}-${preserveIconColor}.json`);
+        if (result.ok) {
+            const data = await result.json();
+            url = data;
             searchSuggestions = [];
             iconNotFound = false;
-        } catch (e) {
+        } else {
             iconNotFound = true;
-            console.error(e);
-        }
-    }
-
-    function getAccentColor(iconName) {
-        // loop through all available icons
-        for (let i = 0; i < icons.length; i++) {
-            // find the right icon and return it's color value
-            if (icons[i].title.toLowerCase() === iconName.toLowerCase()) {
-                return icons[i].hex.toString();
-            }
         }
     }
 
@@ -95,7 +53,7 @@
     <form>
         <div class="search">
             <p class="inputLabel">Search a brand</p>
-            <input type="text" placeholder="title" name="title" bind:value={title} on:input={getSearchSuggestions} use:selectTextOnFocus>
+            <input type="text" placeholder="title" name="title" bind:value={title} on:input={() => {searchSuggestions = getSearchSuggestions(title)}} use:selectTextOnFocus>
             <div class="suggestions">
                 {#each searchSuggestions as suggestion, i (suggestion)}
                     <div animate:flip in:fade out:fly={{x:100}} class="suggestion"><button type="button" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
@@ -117,7 +75,7 @@
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
-            <a href="https://github.com/simple-icons/simple-icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" title="Request icon" target="_blank">Request icon on SimpleIcons</a>
+            <a href="https://github.com/simple-$icons/simple-$icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" title="Request icon" target="_blank">Request icon on SimpleIcons</a>
         {/if}
     </section>
 </main>
