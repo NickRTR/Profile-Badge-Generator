@@ -123,17 +123,12 @@
 </main>
 
 <style>
-    main {
-        display: table-cell;
-        vertical-align: middle;
-        height: 100vh;
-    }
-
     h1 {
         margin: 0;
     }
 
     header {
+        margin-top: 2rem;
         display: flex;
         margin-bottom: 1.5rem;
     }
