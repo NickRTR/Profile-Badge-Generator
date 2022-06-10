@@ -39,8 +39,8 @@ export function getSearchSuggestions(title) {
 
 // colors
 
-export function getAccentColor(iconName) {
-    // BUG: if function is called from api endpoint, allIcons is undefinded
+export async function getAccentColor(iconName) {
+    const allIcons = await fetchIcons();
 
     // loop through all available icons
     for (let i in allIcons) {
@@ -49,11 +49,9 @@ export function getAccentColor(iconName) {
             return allIcons[i].hex.toString();
         }
     }
-
-    return "FFFFFF";
 }
 
-export function getColorDependingOnContrast(color) {
+export function getColorDependingOnContrast(color) {   
     // sets the icon color either black or white, depending on the banner's background
     let rgbColor = hexToRGB(color); // convert hex color to an rgb color
     if ((rgbColor.r * 0.299 + rgbColor.g * 0.587 + rgbColor.b * 0.114) > 150) {
@@ -73,4 +71,11 @@ function hexToRGB(color) {
         g: parseInt(dividedHexColor[1], 16),
         b: parseInt(dividedHexColor[2], 16),
     }
+}
+
+// fetch icons
+async function fetchIcons() {
+    const res = await fetch("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/_data/simple-icons.json");
+    const data = await res.json();
+    return data.icons;
 }

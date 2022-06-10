@@ -1,14 +1,14 @@
 import { getColorDependingOnContrast, getAccentColor } from "$lib/helper";
 
-export function get({ params }) {
+export async function get({ params }) {
     const iconName = params.title;
     const preserveIconColor = params.preserve;
 
     try {
-        let backgroundColor = getAccentColor(iconName);
+        let backgroundColor = await getAccentColor(iconName);
         let iconColor = getColorDependingOnContrast(backgroundColor);
-        if (preserveIconColor) {
-            iconColor = getAccentColor(iconName);
+        if (preserveIconColor === "true") {
+            iconColor = await getAccentColor(iconName);
             backgroundColor = getColorDependingOnContrast(iconColor);
         }
         return {
@@ -18,7 +18,6 @@ export function get({ params }) {
     } catch (e) {
         return {
             status: 404,
-            error: JSON.stringify(e)
         }
     }
 }
