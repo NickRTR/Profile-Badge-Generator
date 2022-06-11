@@ -18,7 +18,6 @@
 
         if (searchSuggestions.length === 1) iconName = searchSuggestions[0];
 
-        url = undefined; // remove old badge
         title = iconName; // update title if suggestion was pressed
         const result = await fetch(`/api/${iconName}-${preserveIconColor}.json`);
         if (result.ok) {
@@ -27,6 +26,7 @@
             searchSuggestions = [];
             iconNotFound = false;
         } else {
+            url = undefined; // remove old badge
             iconNotFound = true;
         }
     }
