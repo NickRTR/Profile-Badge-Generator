@@ -1,11 +1,4 @@
 import { toast } from "@zerodevx/svelte-toast";
-import { icons } from "$lib/stores";
-
-let allIcons = [];
-
-icons.subscribe(value => {
-    allIcons = value
-});
 
 export function copy(text) {
     navigator.clipboard.writeText(text);
@@ -24,13 +17,13 @@ export function copyMarkdownImage(url, title) {
 
 // input
 
-export function getSearchSuggestions(title) {
+export function getSearchSuggestions(title, icons) {
     let searchSuggestions = [];
     if (title !== "") {
-        for (let i in allIcons) {
+        for (let i in icons) {
             // filter the icons to fitting ones and limit max suggestions to 10
-            if (allIcons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
-                searchSuggestions = [...searchSuggestions, allIcons[i].title];
+            if (icons[i].title.toLowerCase().startsWith(title.toLowerCase()) && searchSuggestions.length < 10) {
+                searchSuggestions = [...searchSuggestions, icons[i].title];
             }
         }
     }
@@ -39,14 +32,12 @@ export function getSearchSuggestions(title) {
 
 // colors
 
-export async function getAccentColor(iconName) {
-    const allIcons = await fetchIcons();
-
+export async function getAccentColor(iconName, icons) {
     // loop through all available icons
-    for (let i in allIcons) {
+    for (let i in icons) {
         // find the right icon and return it's color value
-        if (allIcons[i].title.toLowerCase() === iconName.toLowerCase()) {
-            return allIcons[i].hex.toString();
+        if (icons[i].title.toLowerCase() === iconName.toLowerCase()) {
+            return icons[i].hex.toString();
         }
     }
 }
@@ -71,11 +62,4 @@ function hexToRGB(color) {
         g: parseInt(dividedHexColor[1], 16),
         b: parseInt(dividedHexColor[2], 16),
     }
-}
-
-// fetch icons
-async function fetchIcons() {
-    const res = await fetch("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/_data/simple-icons.json");
-    const data = await res.json();
-    return data.icons;
 }

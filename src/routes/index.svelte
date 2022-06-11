@@ -1,3 +1,16 @@
+<script context="module">
+    export async function load({ fetch }) {
+        const res = await fetch("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/_data/simple-icons.json");
+        const data = await res.json();
+
+        return {
+            props: {
+                icons: data.icons
+            }
+        }
+    }
+</script>
+
 <script>
     import { copy, copyMarkdownImage, getSearchSuggestions } from "$lib/helper";
     import { selectTextOnFocus } from "$lib/selectText.js";
@@ -5,23 +18,24 @@
 	import { flip } from 'svelte/animate';
     import Toggle from "svelte-toggle";
 
+    export let icons;
+
     let title = "";
     let preserveIconColor = false;
-
-    // undefinded to hide badge until "getBanner" is called
-    let url;
+    let url; // undefinded to hide badge until "getBanner" is called
     let iconNotFound = false;
     let searchSuggestions = [];
 
-    async function getBanner(iconName) {
+    // call internal Api to get badge
+    async function getBadge(iconName) {
         if (iconName === "") return // escape if input is empty
 
-        if (searchSuggestions.length === 1) iconName = searchSuggestions[0];
-
+        if (searchSuggestions.length === 1) iconName = searchSuggestions[0]; // if only one suggestion, use it
         title = iconName; // update title if suggestion was pressed
-        const result = await fetch(`/api/${iconName}-${preserveIconColor}.json`);
-        if (result.ok) {
-            const data = await result.json();
+
+        const res = await fetch(`/api/${iconName}-${preserveIconColor}.json`); // fetch badge
+        if (res.ok) {
+            const data = await res.json();
             url = data;
             searchSuggestions = [];
             iconNotFound = false;
@@ -48,20 +62,20 @@
     <header>
         <h1>Profile Badge Generator</h1>
         <a href="https://github.com/NickRTR/Profile-Badge-Generator" title="Github" target="_blank"><img class="Github" src="/github.svg" alt="Github" /></a>
-    </header>    
+    </header>
 
     <form>
         <div class="search">
             <p class="inputLabel">Search a brand</p>
-            <input type="text" placeholder="title" name="title" bind:value={title} on:input={() => {searchSuggestions = getSearchSuggestions(title)}} use:selectTextOnFocus>
+            <input type="text" placeholder="title" name="title" bind:value={title} on:input={() => {searchSuggestions = getSearchSuggestions(title, icons)}} use:selectTextOnFocus>
             <div class="suggestions">
                 {#each searchSuggestions as suggestion, i (suggestion)}
-                    <div animate:flip in:fade out:fly={{x:100}} class="suggestion"><button type="button" on:click|preventDefault={() => {getBanner(suggestion)}}>{suggestion}</button></div>
+                    <div animate:flip in:fade out:fly={{x:100}} class="suggestion"><button type="button" on:click|preventDefault={() => {getBadge(suggestion)}}>{suggestion}</button></div>
                 {/each}
             </div>
         </div>
-        <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBanner(title)}} label="Preserve icon color?" /></div>
-        <button type="submit" on:click|preventDefault={() => {getBanner(title)}}>Generate Badge</button>
+        <div class="preserveIcon"><Toggle style bind:toggled={preserveIconColor} on:toggle={() => {getBadge(title)}} label="Preserve icon color?" /></div>
+        <button type="submit" on:click|preventDefault={() => {getBadge(title)}}>Generate Badge</button>
     </form>
     
     <section class="result">
