@@ -21,5 +21,3 @@ Preserve Icon [true/false]: If this option is enabled, the badge will have a whi
 **false:** ![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=Svelte&logoColor=FFFFFF)
 
 ## Todos:
-
-TODO: Implement testing with vitest
