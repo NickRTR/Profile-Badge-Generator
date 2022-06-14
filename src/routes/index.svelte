@@ -89,7 +89,7 @@
         {/if}
         {#if iconNotFound}
             <p class="error">Icon not found!</p>
-            <a href="https://github.com/simple-$icons/simple-$icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" title="Request icon" target="_blank">Request icon on SimpleIcons</a>
+            <a class="button" href="https://github.com/simple-$icons/simple-$icons/issues/new?labels=new+icon&template=icon_request.yml&title=Request%3A+" title="Request icon" target="_blank">Request icon on SimpleIcons</a>
         {/if}
     </section>
 </main>
@@ -125,6 +125,10 @@
         color: black;
     }
 
+    .button {
+        user-select: none;
+    }
+
     input {
         border-radius: .75rem;
         border: none;
@@ -132,6 +136,7 @@
         border: 3px solid var(--text);
         font-size: 1rem;
         transition: all linear .2s;
+        user-select: none;
     }
 
     .inputLabel {
