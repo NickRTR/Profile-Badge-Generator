@@ -19,5 +19,3 @@ Preserve Icon [true/false]: If this option is enabled, the badge will have a whi
 **true:** ![Svelte](https://img.shields.io/badge/Svelte-FFFFFF?style=for-the-badge&logo=Svelte&logoColor=FF3E00)
 
 **false:** ![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=Svelte&logoColor=FFFFFF)
-
-## Todos:
