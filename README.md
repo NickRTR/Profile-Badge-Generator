@@ -2,11 +2,11 @@
 
 <img src="https://user-images.githubusercontent.com/95316598/198510818-869f5786-8eb0-4f06-8015-b10643d8dc4d.png" alt="screenshot" height="400px"/>
 
-The purpose of this project is to provide an easy way to create Badges like this one: 
+The purpose of this project is to provide an easy way to create Badges like this one:
 
 ![Svelte Badge](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=Svelte&logoColor=FFFFFF)
 
-## Usage: 
+## Usage:
 
 1. Go to https://profilebadges.vercel.app/
 2. Enter the Logo you're trying to find
