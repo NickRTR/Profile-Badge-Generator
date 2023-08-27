@@ -1,6 +1,6 @@
 # Profile-Badge-Generator
 
-<img src="https://user-images.githubusercontent.com/95316598/198510818-869f5786-8eb0-4f06-8015-b10643d8dc4d.png" alt="screenshot" height="400px"/>
+<img src="static/screenshot.png" alt="screenshot" height="300px"/>
 
 The purpose of this project is to provide an easy way to create Badges like this one:
 

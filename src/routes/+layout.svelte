@@ -25,8 +25,7 @@
 		margin-inline: 0.25rem;
 		height: 100%;
 		background-attachment: fixed;
-		background-color: #21d4fd;
-		background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+		background-image: linear-gradient(45deg, #231557 0%, #44107a 15%, #ff1361 55%, #fff800 100%);
 		background-repeat: no-repeat;
 		display: flex;
 		justify-content: center;
