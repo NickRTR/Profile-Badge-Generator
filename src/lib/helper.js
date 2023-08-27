@@ -15,8 +15,6 @@ export function copyMarkdownImage(url, title) {
 	toast.success("Copied Markdown image to clipboard!");
 }
 
-// input
-
 export function getSearchSuggestions(title, icons) {
 	let searchSuggestions = [];
 	if (title !== "") {
@@ -33,32 +31,21 @@ export function getSearchSuggestions(title, icons) {
 	return searchSuggestions;
 }
 
-// colors
-
 export async function getAccentColor(iconName, icons) {
-	// loop through all available icons
-	for (let i in icons) {
-		// find the right icon and return it's color value
-		if (icons[i].title.toLowerCase() === iconName.toLowerCase()) {
-			return icons[i].hex.toString();
-		}
-	}
+	const matchedIcon = icons.find((icon) => icon.title.toLowerCase() === iconName.toLowerCase());
+	return matchedIcon.hex;
 }
 
 export function getColorDependingOnContrast(color) {
-	// sets the icon color either black or white, depending on the banner's background
-	let rgbColor = hexToRGB(color); // convert hex color to an rgb color
-	if (rgbColor.r * 0.299 + rgbColor.g * 0.587 + rgbColor.b * 0.114 > 150) {
-		return "000000";
-	} else {
-		return "FFFFFF";
-	}
+	// sets the icon color either black or white, depending on the banner's background color
+	const rgbColor = hexToRGB(color);
+	const luminance = rgbColor.r * 0.299 + rgbColor.g * 0.587 + rgbColor.b * 0.114;
+	return luminance > 150 ? "000000" : "FFFFFF";
 }
 
 function hexToRGB(color) {
 	// divide Hex color into r, g and b
 	var dividedHexColor = color.match(/.{1,2}/g);
-	dividedHexColor;
 
 	// parse r, g and b to int on base 16
 	return {

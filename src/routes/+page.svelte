@@ -103,7 +103,7 @@
 				<img
 					src={url}
 					alt={title}
-					{title}
+					title="Copy URL"
 					on:click={() => {
 						copy(url);
 					}}
@@ -163,7 +163,6 @@
 		margin-top: 0.2rem;
 	}
 
-	/* input */
 	button {
 		border-radius: 0.6rem;
 		outline: none;
@@ -227,7 +226,6 @@
 		border: 3px solid var(--accent);
 	}
 
-	/* result */
 	section.result {
 		margin-top: 1.5rem;
 		padding-top: 0.5rem;

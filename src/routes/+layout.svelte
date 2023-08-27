@@ -14,7 +14,6 @@
 <style>
 	* {
 		margin: 0;
-		/* text-align: center; */
 		color: var(--text);
 		font-family: monospace;
 		font-size: 1rem;
