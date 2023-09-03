@@ -21,7 +21,7 @@
 	}
 
 	body {
-		margin-inline: 0.25rem;
+		margin-inline: 0.55rem;
 		height: 100%;
 		background-attachment: fixed;
 		background-image: linear-gradient(45deg, #231557 0%, #44107a 15%, #ff1361 55%, #fff800 100%);

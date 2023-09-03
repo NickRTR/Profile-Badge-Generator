@@ -17,18 +17,31 @@ export function copyMarkdownImage(url, title) {
 
 export function getSearchSuggestions(title, icons) {
 	let searchSuggestions = [];
-	if (title !== "") {
-		for (let i in icons) {
-			// filter the icons to fitting ones and limit max suggestions to 10
-			if (
-				icons[i].title.toLowerCase().startsWith(title.toLowerCase()) &&
-				searchSuggestions.length < 10
-			) {
-				searchSuggestions = [...searchSuggestions, icons[i].title];
-			}
-		}
+	if (title === "") return searchSuggestions;
+	searchSuggestions = icons.filter((icon) => {
+		const lowerCaseTitle = icon.title.toLowerCase();
+		const lowerCaseSearchTerm = title.toLowerCase();
+		return lowerCaseTitle.startsWith(lowerCaseSearchTerm);
+	});
+	if (searchSuggestions.length > 0) {
+		return searchSuggestions.slice(0, 10).map((icon) => icon.title);
 	}
-	return searchSuggestions;
+	searchSuggestions = icons.filter((icon) => {
+		const lowerCaseTitle = icon.title.toLowerCase();
+		const lowerCaseSearchTerm = title.toLowerCase();
+		return (
+			lowerCaseTitle.includes(lowerCaseSearchTerm) ||
+			removeAccents(lowerCaseTitle).includes(removeAccents(lowerCaseSearchTerm))
+		);
+	});
+	return searchSuggestions.slice(0, 10).map((icon) => icon.title);
+}
+
+function removeAccents(input) {
+	return input
+		.toLowerCase()
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "");
 }
 
 export async function getAccentColor(iconName, icons) {
